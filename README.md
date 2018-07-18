@@ -21,7 +21,17 @@
     - [Operators](#operators)
     - [Type conversion](#type-conversion)
     - [Number formatting](#number-formatting)
-- [Lesson 2: Kotlin Basics](#lesson-2-kotlin-basics)
+    - [Nullability](#nullability)
+    - [Strings / String Templates](#strings--string-templates)
+    - [if/else](#ifelse)
+    - [when](#when)
+    - [listOf / mutableListOf](#listof--mutablelistof)
+    - [arrayOf / mutableArrayOf / intArray?](#arrayof--mutablearrayof--intarray)
+    - [for loop](#for-loop)
+- [Lesson 2: Functions](#lesson-2-functions)
+    - [Functions](#functions)
+    - [Lambas (anonymous functions)](#lambas-anonymous-functions)
+    - [Higher order functions (fun with fun arg)](#higher-order-functions-fun-with-fun-arg)
 - [Lesson 3](#lesson-3)
 - [Lesson 4](#lesson-4)
 - [Lesson 5](#lesson-5)
@@ -62,33 +72,135 @@ fun main (args: Array<String>) {
 - -, fish.minus(3)
       
 #### Type conversion 
-```
+```kotlin
 1.toLong()
 1.toString()
 ```
 #### Number formatting
-```
+```kotlin
 val oneMillion = 1_000_000
 val socialSecurityNumber = 999_99_9999L
-val (immutable) &amp; var (mutable)
+val (immutable) & var (mutable)
 ```
 
-http://images.google.com/images?num=30&q=larry+bird
-http://images.google.com/images?num=30&amp;q=larry+bird
-
-AT&gt;T
-    AT&amp;T
-
-
-```
+```kotlin
 val aquarium = "my aquarium"
 var fish = 50
 var snails : Int = 12
 ```
 
 
+#### Nullability
+```kotlin
+var rocks: Int = null //Error
+var marbles: Int? = null
+fishFoodTreats?.dec()
 
-## Lesson 2: Kotlin Basics
+var lotsOfFish: List<String?> = listOf(null, null)
+
+return fishFoodTreats?.dec() ?:0
+goldfish!!.eat
+```
+#### Strings / String Templates
+```kotlin
+"hello" + "fish" + "!"
+"I have $numberOfFish fish"
+"Print ${ numberOfFish + 5 } fish"
+"fish" == "fish"
+val message = "You are ${ if (length < 5) "fried" else "safe" } fish"
+```
+
+#### if/else
+```kotlin
+if (numberOfFish > numberOfPlants) {     
+   println("Good ratio!") 
+} else {
+    println("unhealthy ratio")
+}
+```
+
+```kotlin
+if (fish in 1..100) println(fish)
+``
+
+
+```kotlin
+val isHot = if (temperature > 90) true else false
+```
+ 
+#### when
+```kotlin
+when (numberOfFish) { 
+  0  -> println("Empty tank") 
+  in 1..50 -> println("Got fish!") 
+  else -> println("Perfect!") 
+}
+```
+
+#### listOf / mutableListOf
+```kotlin
+val myList = 
+   mutableListOf("tuna",,"shark")
+```
+
+
+```kotlin
+myList.remove("shark") // OK!
+```
+
+
+```kotlin
+val swarm = listOf(fish, plants)
+```
+
+#### arrayOf / mutableArrayOf / intArray?
+```kotlin
+val school = arrayOf("tuna","salmon","shark")
+```
+```kotlin
+val mix = arrayOf("fish", 2)
+```
+```kotlin
+println(Arrays.toString(intArrayOf(2, "foo")))
+
+val bigSwarm = arrayOf(swarm, arrayOf("dolphin","whale","orka"))
+
+val array = Array (5) { it * 2 }
+```
+
+#### for loop
+```kotlin
+for (element in swarm) {...}
+for ((index, element) in swarm.withIndex()) {
+    println("Fish at $index is $element")
+}
+for (i in 'b'..'g') print(i)
+ 
+for (i in 1..5) print(i) 
+
+
+
+
+for (i in 5 downTo 1) print(i)
+
+
+
+
+for (i in 3..6 step 2) print(i) // Prints: 35
+```        
+
+
+
+
+
+
+## Lesson 2: Functions
+#### Functions
+
+#### Lambas (anonymous functions)
+
+
+#### Higher order functions (fun with fun arg)
 
 
 
