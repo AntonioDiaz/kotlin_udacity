@@ -110,6 +110,7 @@ fun main (args: Array<String>) {
 1.toLong()
 1.toString()
 ```
+
 #### Number formatting
 ```kotlin
 val oneMillion = 1_000_000
@@ -136,6 +137,7 @@ var lotsOfFish: List<String?> = listOf(null, null)
 return fishFoodTreats?.dec() ?:0
 goldfish!!.eat
 ```
+
 #### Strings / String Templates
 ```kotlin
 "hello" + "fish" + "!"
@@ -156,7 +158,7 @@ if (numberOfFish > numberOfPlants) {
 
 ```kotlin
 if (fish in 1..100) println(fish)
-``
+```
 
 
 ```kotlin
