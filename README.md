@@ -30,9 +30,11 @@
     - [for loop](#for-loop)
 - [Lesson 2: Functions](#lesson-2-functions)
     - [Functions](#functions)
+    - [Compact Functions](#compact-functions)
+    - [Filters](#filters)
     - [Lambas (anonymous functions)](#lambas-anonymous-functions)
     - [Higher order functions (fun with fun arg)](#higher-order-functions-fun-with-fun-arg)
-- [Lesson 3](#lesson-3)
+- [Lesson 3: Classes](#lesson-3-classes)
 - [Lesson 4](#lesson-4)
 - [Lesson 5](#lesson-5)
 
@@ -174,17 +176,12 @@ for (element in swarm) {...}
 for ((index, element) in swarm.withIndex()) {
     println("Fish at $index is $element")
 }
+
 for (i in 'b'..'g') print(i)
  
 for (i in 1..5) print(i) 
 
-
-
-
 for (i in 5 downTo 1) print(i)
-
-
-
 
 for (i in 3..6 step 2) print(i) // Prints: 35
 ```        
@@ -196,15 +193,52 @@ for (i in 3..6 step 2) print(i) // Prints: 35
 
 ## Lesson 2: Functions
 #### Functions
+```kotlin
+fun randomDay(): String {return "Monday"}
+
+fun fishFood (hour: Int, day: String = "Tuesday"): String {}
+
+fun isTooHot(temperature: Int): Boolean = temperature > 30
+```
+
+#### Compact Functions
+```kotlin
+fun isTooHot(temperature: Int) = temperature > 30
+
+fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = 20): Boolean {
+    return when {
+       isTooHot(temperature)-> true
+       else  -> false
+    }
+}
+
+fun getDirtySensorReading() = return 20
+
+fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = getDirtySensorReading()) {...}
+```
+
+#### Filters
+```kotlin
+println( decorations.filter {it[0] == 'p'})
+```
 
 #### Lambas (anonymous functions)
-
+```kotlin
+{ println("Hello") }()
+val waterFilter = { dirty: Int -> dirty / 2 }
+val waterFilter : (Int) -> Int = { dirty -> dirty / 2 }
+```
 
 #### Higher order functions (fun with fun arg)
+```kotlin
+fun updateDirty(dirty: Int, operation: (Int) -> Int): Int {
+   return operation(dirty)
+}
+updateDirty(50, ::increaseDirty)
+```
 
 
-
-## Lesson 3
+## Lesson 3: Classes
 
 ## Lesson 4
 
