@@ -35,6 +35,15 @@
     - [Lambas (anonymous functions)](#lambas-anonymous-functions)
     - [Higher order functions (fun with fun arg)](#higher-order-functions-fun-with-fun-arg)
 - [Lesson 3: Classes](#lesson-3-classes)
+    - [class](#class)
+    - [Visibility](#visibility)
+    - [Inheritance](#inheritance)
+    - [Abstract classes](#abstract-classes)
+    - [Interfaces](#interfaces)
+    - [Data Classes](#data-classes)
+    - [Composition](#composition)
+    - [Singleton / object](#singleton--object)
+    - [enum](#enum)
 - [Lesson 4](#lesson-4)
 - [Lesson 5](#lesson-5)
 
@@ -239,6 +248,157 @@ updateDirty(50, ::increaseDirty)
 
 
 ## Lesson 3: Classes
+#### class
+```kotlin
+class Aquarium(var length: Int = 100, var width: Int = 20, var height: Int = 40) {
+
+
+constructor(numOfFish: Int): this() {
+
+    init {
+     // do stuff
+    }
+
+    val volume: Int 
+       get() {
+         return w * h * l / 1000
+       }
+
+    init {
+       // do stuff with volume
+    }
+}
+```
+#### Visibility
+package:
+- public - default. Everywhere
+- private - file
+- internal - module
+
+class:
+- sealed - only subclass in same file
+
+inside class: 
+- public - default. Everywhere.
+- private - inside class, not subclasses
+- protected - inside class and subclasses
+- internal - module
+
+#### Inheritance
+```kotlin
+open class Aquarium ?.. {
+    open var water = volume * 0.9
+    open var volume
+}
+```
+
+```kotlin
+class TowerTank (): Aquarium() {
+    override var volume: Int
+    get() = (w * h * l / 1000 * PI).toInt()
+    set(value) {
+       h = (value * 1000) / (w * l)
+    }
+}
+```
+
+#### Abstract classes
+```kotlin
+abstract class AquariumFish {
+   abstract val color: String
+}
+
+class Shark: AquariumFish() {
+    override val color = "gray"
+}
+
+class Plecostomus: AquariumFish() {
+    override val color = "gold"
+}
+```
+
+#### Interfaces
+```kotlin
+interface FishAction  {
+   fun eat()
+}
+
+
+class Shark: AquariumFish(), FishAction {
+   override val color = "gray"
+   override fun eat() {
+       println("hunt and eat fish")
+   }
+}
+
+fun feedFish(fish: FishAction) {
+   // make some food then
+    fish.eat()
+}
+```
+
+#### Data Classes
+```kotlin
+data class Decorations(val rocks: String, val wood: String, val diver: String){ }
+
+val d = Decorations("crystal", "wood", "diver")
+val (rock, wood, diver) = d
+
+dataClassInstance1.equals(dataClassInstance2)
+val dataClassInstance3.copy(dataClassInstance2)
+```
+
+
+#### Composition
+```kotlin
+fun main (args: Array<String>) {
+   delegate()
+}
+
+fun delegate() {
+   val pleco = Plecostomus()
+   println("Fish has has color ${pleco.color}")
+   pleco.eat()
+}
+
+interface FishAction {
+   fun eat()
+}
+
+interface FishColor {
+   val color: String
+}
+
+object GoldColor : FishColor {
+   override val color = "gold"
+}
+
+class PrintingFishAction(val food: String) : FishAction {
+   override fun eat() {
+       println(food)
+   }
+}
+
+class Plecostomus (fishColor: FishColor = GoldColor):
+       FishAction by PrintingFishAction("eat a lot of algae"),
+       FishColor by fishColor
+```
+
+#### Singleton / object
+```kotlin
+object MobyDickWhale {
+    val author = "Herman Melville"
+}
+```
+
+
+#### enum
+```kotlin
+enum class Color(val rgb: Int) {
+   RED(0xFF0000), GREEN(0x00FF00), BLUE(0x0000FF);
+}
+Color.RED
+```
 
 ## Lesson 4
 
