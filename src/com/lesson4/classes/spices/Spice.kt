@@ -1,4 +1,4 @@
-package com.lesson3.classes.spices
+package com.lesson4.classes.spices
 
 fun main(args: Array<String>) {
 

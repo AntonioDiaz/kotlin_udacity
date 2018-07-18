@@ -1,4 +1,4 @@
-package com.lesson3.classes
+package com.lesson4.classes
 
 class Spice (var name: String, private var spiceness:String = "mild") {
     val heat: Int

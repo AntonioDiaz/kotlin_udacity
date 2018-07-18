@@ -1,4 +1,4 @@
-package com.lesson1.basics
+package com.lesson2.basics
 
 fun main(args: Array<String>) {
     for (i in 0..9) {

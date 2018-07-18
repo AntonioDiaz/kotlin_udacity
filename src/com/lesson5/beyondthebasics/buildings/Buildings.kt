@@ -1,4 +1,4 @@
-package com.lesson5.datastructures.buildings
+package com.lesson5.beyondthebasics.buildings
 
 open class BaseBuildingMaterial(val numberNeeded:Int=1){
 

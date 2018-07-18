@@ -1,4 +1,4 @@
-package com.lesson2.functions
+package com.lesson3.functions
 
 import java.util.*
 

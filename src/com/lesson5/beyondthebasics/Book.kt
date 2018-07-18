@@ -1,4 +1,4 @@
-package com.lesson5.datastructures
+package com.lesson5.beyondthebasics
 
 data class Book (val title: String, val author: String, val year: Int){
     fun getPairTitleAuthor(): Pair<String, String> { return title to author}

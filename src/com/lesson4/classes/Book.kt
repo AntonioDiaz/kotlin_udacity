@@ -1,4 +1,4 @@
-package com.lesson3.classes
+package com.lesson4.classes
 
 const val MAX_BOOKS = 3;
 
@@ -15,7 +15,8 @@ open class Book(var title: String, var author: String) {
         currentPage++;
     }
 
-    fun canBorrow():Boolean {return booksBorrowed < MAX_BOOKS};
+    fun canBorrow():Boolean {return booksBorrowed < MAX_BOOKS
+    };
     fun printUrl(){
         println("${BASE_URL}/${title}.html")
     }

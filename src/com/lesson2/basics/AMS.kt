@@ -1,4 +1,4 @@
-package com.lesson1.basics
+package com.lesson2.basics
 
 import java.util.*
 
