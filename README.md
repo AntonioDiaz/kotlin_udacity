@@ -15,8 +15,8 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Contents**
 
-- [Lesson 0: Introduction](#lesson-0-introduction)
-- [Lesson 1: Kotlin Basics](#lesson-1-kotlin-basics)
+- [Lesson 1: Introduction](#lesson-1-introduction)
+- [Lesson 2: Kotlin Basics](#lesson-2-kotlin-basics)
     - [Hello Kotlin function](#hello-kotlin-function)
     - [Operators](#operators)
     - [Type conversion](#type-conversion)
@@ -29,13 +29,13 @@
     - [listOf / mutableListOf](#listof--mutablelistof)
     - [arrayOf / mutableArrayOf / intArray](#arrayof--mutablearrayof--intarray)
     - [for loop](#for-loop)
-- [Lesson 2: Functions](#lesson-2-functions)
+- [Lesson 3: Functions](#lesson-3-functions)
     - [Functions](#functions)
     - [Compact Functions](#compact-functions)
     - [Filters](#filters)
     - [Lambas (anonymous functions)](#lambas-anonymous-functions)
     - [Higher order functions (fun with fun arg)](#higher-order-functions-fun-with-fun-arg)
-- [Lesson 3: Classes](#lesson-3-classes)
+- [Lesson 4: Classes](#lesson-4-classes)
     - [class](#class)
     - [Visibility](#visibility)
     - [Inheritance](#inheritance)
@@ -45,7 +45,7 @@
     - [Composition](#composition)
     - [Singleton / object](#singleton--object)
     - [enum](#enum)
-- [Lesson 4](#lesson-4)
+- [Lesson 5: Beyond the Basics](#lesson-5-beyond-the-basics)
     - [pairs](#pairs)
     - [list](#list)
     - [mapping](#mapping)
@@ -62,7 +62,7 @@
     - [Reflection](#reflection)
     - [Annotations for getters and setters](#annotations-for-getters-and-setters)
     - [Labeled breaks](#labeled-breaks)
-- [Lesson 5](#lesson-5)
+- [Lesson 6: Functional Manipulation](#lesson-6-functional-manipulation)
     - [Lambda recap](#lambda-recap)
     - [Higher order function](#higher-order-function)
     - [Standard Library: apply & run](#standard-library-apply--run)
@@ -73,13 +73,13 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
-## Lesson 0: Introduction
+## Lesson 1: Introduction
 
 - Install JDK if you don't have it
 - Link to downloading  IntelliJ
 - Starting the interpreter: Tools > Kotlin > Kotlin REPL
 
-## Lesson 1: Kotlin Basics
+## Lesson 2: Kotlin Basics
 
 #### Hello Kotlin function
 
@@ -224,7 +224,7 @@ for (i in 3..6 step 2) print(i) // Prints: 35
 
 
 
-## Lesson 2: Functions
+## Lesson 3: Functions
 #### Functions
 ```kotlin
 fun randomDay(): String {return "Monday"}
@@ -271,7 +271,7 @@ updateDirty(50, ::increaseDirty)
 ```
 
 
-## Lesson 3: Classes
+## Lesson 4: Classes
 #### class
 ```kotlin
 class Aquarium(var length: Int = 100, var width: Int = 20, var height: Int = 40) {
@@ -424,7 +424,7 @@ enum class Color(val rgb: Int) {
 Color.RED
 ```
 
-## Lesson 4
+## Lesson 5: Beyond the Basics
 #### pairs
 ```kotlin
 val equipment = "fishnet" to "catching fish"
@@ -653,7 +653,7 @@ fun labels() {
 }
 ```
 
-## Lesson 5
+## Lesson 6: Functional Manipulation
 #### Lambda recap
 ```kotlin
 myFish.filter { it.name.contains("i")}.joinToString (" ") { it.name }
