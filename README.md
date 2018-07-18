@@ -45,6 +45,22 @@
     - [Singleton / object](#singleton--object)
     - [enum](#enum)
 - [Lesson 4](#lesson-4)
+    - [pairs](#pairs)
+    - [list](#list)
+    - [mapping](#mapping)
+    - [constants](#constants)
+    - [extension functions](#extension-functions)
+    - [property extensions](#property-extensions)
+    - [generic classes](#generic-classes)
+    - [generics: full example](#generics-full-example)
+    - [generics: Non-nullable](#generics-non-nullable)
+    - [generics: In and Out Types](#generics-in-and-out-types)
+    - [Generic functions and methods](#generic-functions-and-methods)
+    - [Inline / reified](#inline--reified)
+    - [Annotations](#annotations)
+    - [Reflection](#reflection)
+    - [Annotations for getters and setters](#annotations-for-getters-and-setters)
+    - [Labeled breaks](#labeled-breaks)
 - [Lesson 5](#lesson-5)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -401,5 +417,237 @@ Color.RED
 ```
 
 ## Lesson 4
+#### pairs
+```kotlin
+val equipment = "fishnet" to "catching fish"
+println(equipment.first)
+println(equipment.second)
+
+val (tool, use) = fishnet
+val fishnetString = fishnet.toString()
+println(fishnet.toList())
+
+//Nesting with parentheses:
+val equip = ("fishnet" to "catching fish") to ("of big size" to "and strong")
+equipment.first.first
+```
+
+#### list
+```kotlin
+val testList = listOf(11,12,13,14,15,16,17,18,19,20)
+listOf<Int>(1,2,3,4,5,6,7,8,9,0).reversed()
+
+
+
+
+var symptoms = mutableListOf("white spots", "red spots", "not eating", "bloated", "belly up")
+symptoms.add("white fungus")
+symptoms.remove("white fungus")
+symptoms.contains("red")
+println(symptoms.subList(4, symptoms.size))
+
+
+
+
+listOf(1, 5, 3).sum()
+listOf("a", "b", "cc").sumBy { it.length }
+```
+
+
+#### mapping
+```kotlin
+val cures = hashMapOf("white spots" to "Ich", "red sores" to "hole disease")
+
+println(cures["white spots"])
+
+cures.getOrDefault("bloating", "sorry, I don't know")
+
+cures.getOrElse("bloating") {"No cure for this"}
+
+val inventory = mutableMapOf("fish net" to 1)
+
+inventory.put("tank scrubber", 3)
+inventory.remove("fish net")
+```
+
+#### constants
+```kotlin
+const val CONSTANT = "top-level constant" // compile time
+
+object Constants {
+const val CONSTANT2 = "object constant"
+}
+
+class MyClass {
+    companion object {
+        const val CONSTANT3 = "constant in companion"
+    }
+}
+```
+
+#### extension functions
+```kotlin
+fun String.hasSpaces(): Boolean {
+   val found = this.find { it == ' ' }
+   return found != null
+}
+
+fun extensionExample() {
+   ?Does it have spaces??.hasSpaces()
+}
+
+? fun String.hasSpaces() = find { it == ' ' } != null
+
+fun AquariumPlant.isRed() = color == "red"
+
+fun AquariumPlant?.pull() {
+   this?.apply {
+       println("removing $this")
+   }
+}
+```
+
+#### property extensions
+```kotlin
+val AquariumPlant.isGreen: Boolean
+   get() = color == "green"
+
+fun propertyExample() {
+   val plant = GreenLeafyPlant(30)
+   plant.isGreen // true
+}
+```
+
+#### generic classes
+```kotlin
+class MyList<T> {
+   fun get(pos: Int): T {
+   TODO("implement")
+}
+
+fun addItem(item: T) {}
+}
+
+fun workWithMyList() {
+   val intList: MyList<String>
+   val fishList: MyList<Fish>
+}
+```
+
+#### generics: full example
+```kotlin
+open class WaterSupply(var needsProcessed: Boolean)
+
+class TapWater : WaterSupply(true) {
+   fun addChemicalCleaners() {
+       needsProcessed = false
+   }
+}
+
+class FishStoreWater : WaterSupply(false)
+
+class LakeWater : WaterSupply(true) {
+   fun filter() {
+       needsProcessed = false
+   }
+}
+
+class Aquarium<T>(val waterSupply: T)
+
+fun genericsExample() {
+   val aquarium = Aquarium(TapWater())
+aquarium.waterSupply.addChemicalCleanes()
+}
+```
+#### generics: Non-nullable
+```kotlin
+class Aquarium<T: Any>(val waterSupply: T)
+
+class Aquarium<T: WaterSupply>(val waterSupply: T)
+```
+
+#### generics: In and Out Types
+```kotlin
+class Aquarium<out T: WaterSupply>(val waterSupply: T) { ?}
+
+interface Cleaner<in T: WaterSupply> {
+   fun clean(waterSupply: T)
+}
+```
+
+#### Generic functions and methods
+```kotlin
+fun <T: WaterSupply> isWaterClean(aquarium: Aquarium<T>) {
+   println("aquarium water is clean: ${aquarium.waterSupply.needsProcessed}")
+}
+
+fun genericsFunExample() {
+   val aquarium = Aquarium(TapWater())
+   isWaterClean(aquarium)
+}
+
+fun <R: WaterSupply> hasWaterSupplyOfType() = waterSupply is R
+```
+
+#### Inline / reified
+```kotlin
+inline fun <reified R: WaterSupply> hasWaterSupplyOfType() = waterSupply is R
+
+inline fun <reified T: WaterSupply> WaterSupply.isOfType() = this is T
+
+inline fun <reified R: WaterSupply> Aquarium<*>.hasWaterSupplyOfType() = waterSupply is R
+```
+
+#### Annotations
+```kotlin
+@file:JvmName(?InteropFish?)
+@JvmStatic fun interop()
+
+annotation class ImAPlant
+@ImAPlant class Plant{...}
+
+val plantObject = Plant::class
+for (a in plantObject.annotations) {
+   println(a.annotationClass.simpleName)
+}
+```
+
+#### Reflection
+```kotlin
+val classobj=Plant::class
+for(m in classobj.declaredMemberFunctions){
+  println(m.name)
+}
+```
+#### Annotations for getters and setters
+```kotlin
+@Target(PROPERTY_GETTER)
+annotation class OnGet
+@Target(PROPERTY_SETTER)
+Annotation class OnSet
+
+@ImAPlant class Plant {
+   @get:OnGet
+   val isGrowing: Boolean = true
+
+   @set:OnSet
+   var needsFood: boolean = false
+}
+```
+#### Labeled breaks
+```kotlin
+fun labels() {
+   loop@ for (i in 1..100) {
+       for (j in 1..100) {
+           if (i > 10) break@loop
+       }
+   }
+}
+```
+
+
+
+
+
 
 ## Lesson 5
