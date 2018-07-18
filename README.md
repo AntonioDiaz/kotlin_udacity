@@ -21,12 +21,13 @@
     - [Operators](#operators)
     - [Type conversion](#type-conversion)
     - [Number formatting](#number-formatting)
+    - [val (immutable) & var (mutable)](#val-immutable--var-mutable)
     - [Nullability](#nullability)
     - [Strings / String Templates](#strings--string-templates)
     - [if/else](#ifelse)
     - [when](#when)
     - [listOf / mutableListOf](#listof--mutablelistof)
-    - [arrayOf / mutableArrayOf / intArray?](#arrayof--mutablearrayof--intarray)
+    - [arrayOf / mutableArrayOf / intArray](#arrayof--mutablearrayof--intarray)
     - [for loop](#for-loop)
 - [Lesson 2: Functions](#lesson-2-functions)
     - [Functions](#functions)
@@ -113,8 +114,9 @@ fun main (args: Array<String>) {
 ```kotlin
 val oneMillion = 1_000_000
 val socialSecurityNumber = 999_99_9999L
-val (immutable) & var (mutable)
 ```
+
+#### val (immutable) & var (mutable)
 
 ```kotlin
 val aquarium = "my aquarium"
@@ -186,7 +188,7 @@ myList.remove("shark") // OK!
 val swarm = listOf(fish, plants)
 ```
 
-#### arrayOf / mutableArrayOf / intArray?
+#### arrayOf / mutableArrayOf / intArray
 ```kotlin
 val school = arrayOf("tuna","salmon","shark")
 ```
