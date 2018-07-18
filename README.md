@@ -62,6 +62,12 @@
     - [Annotations for getters and setters](#annotations-for-getters-and-setters)
     - [Labeled breaks](#labeled-breaks)
 - [Lesson 5](#lesson-5)
+    - [Lambda recap](#lambda-recap)
+    - [Higher order function](#higher-order-function)
+    - [Standard Library: apply & run](#standard-library-apply--run)
+    - [Standard Library: with & repeat](#standard-library-with--repeat)
+    - [Inline](#inline)
+    - [Lambda instead ofSAM](#lambda-instead-ofsam)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -645,9 +651,46 @@ fun labels() {
 }
 ```
 
-
-
-
-
-
 ## Lesson 5
+#### Lambda recap
+```kotlin
+myFish.filter { it.name.contains("i")}.joinToString (" ") { it.name }
+```
+#### Higher order function
+```kotlin
+fun myWith(name: String, block: String.() -> Unit) {
+    name.block()
+}
+```
+#### Standard Library: apply & run
+```kotlin
+fish.run {
+   name
+}
+
+val fish2 = Fish().apply {
+     name = ?sharky?
+}
+```
+#### Standard Library: with & repeat
+```kotlin
+with(fish.name) {
+   println(name)
+}
+
+repeat(3) { rep ->
+    println(" current repetition: $rep")}
+```
+#### Inline
+```kotlin
+Inline fun myWith(name: String, operation: String.() -> Unit) {
+    name.operation()
+}
+```
+#### Lambda instead ofSAM
+```kotlin
+fun example() {
+   runNow {
+      println(?Passing a lambda as a Runnable?)
+}
+```
