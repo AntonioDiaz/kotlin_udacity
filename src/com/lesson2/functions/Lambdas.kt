@@ -1,3 +1,5 @@
+package com.lesson2.functions
+
 import java.util.*
 
 val rollDice = {slices:Int ->

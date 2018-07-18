@@ -1,3 +1,5 @@
+package com.lesson1.basics
+
 fun main(args: Array<String>) {
     for (i in 0..9) {
         val birthday = getBirthday()

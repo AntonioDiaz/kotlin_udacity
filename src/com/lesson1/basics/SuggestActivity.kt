@@ -1,3 +1,5 @@
+package com.lesson1.basics
+
 fun main(args: Array<String>) {
 
 }

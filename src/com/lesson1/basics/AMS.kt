@@ -1,3 +1,5 @@
+package com.lesson1.basics
+
 import java.util.*
 
 fun main(args: Array<String>) {
@@ -21,10 +23,10 @@ fun dayOfWeek() {
     if (shouldChangeWater("Monday")) {
         println("Change the water today")
     }
-    println(canAddFish(10.0, listOf(3,3,3)));
-    println(canAddFish(8.0, listOf(2,2,2), hasDecorations = false));
+    println(canAddFish(10.0, listOf(3, 3, 3)));
+    println(canAddFish(8.0, listOf(2, 2, 2), hasDecorations = false));
 
-    println(canAddFish(9.0, listOf(1,1,3), 3));
+    println(canAddFish(9.0, listOf(1, 1, 3), 3));
     println(canAddFish(10.0, listOf(), 7, true));
 
 }
@@ -86,6 +88,6 @@ fun updateDirty(dirty: Int, operation: (Int) -> Int): Int {return operation(dirt
 fun dirtyProcessor() {
     dirty = updateDirty(dirty, waterFilter)
     dirty = updateDirty(dirty, ::feedFish);
-    dirty = updateDirty(dirty, {dirty -> dirty + 50})
+    dirty = updateDirty(dirty, { dirty -> dirty + 50 })
 }
 
