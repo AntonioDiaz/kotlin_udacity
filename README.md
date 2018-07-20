@@ -662,7 +662,7 @@ data class Fish (val name: String)
 val myFish = listOf(Fish("Flipper"), Fish("Mobi Dick"), Fish("Dory"))
 myFish.filter { it.name.contains("i")}.joinToString (" ") { it.name }
 ```
-#### Higher order function
+#### Higher-Order function
 ```kotlin
 fun myWith(name: String, block: String.() -> Unit) {
     name.block()
