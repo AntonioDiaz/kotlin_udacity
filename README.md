@@ -658,6 +658,8 @@ fun labels() {
 ## Lesson 6: Functional Manipulation
 #### Lambda recap
 ```kotlin
+data class Fish (val name: String)
+val myFish = listOf(Fish("Flipper"), Fish("Mobi Dick"), Fish("Dory"))
 myFish.filter { it.name.contains("i")}.joinToString (" ") { it.name }
 ```
 #### Higher order function
@@ -691,7 +693,7 @@ Inline fun myWith(name: String, operation: String.() -> Unit) {
     name.operation()
 }
 ```
-#### Lambda instead ofSAM
+#### Lambda instead of SAM
 ```kotlin
 fun example() {
    runNow {
