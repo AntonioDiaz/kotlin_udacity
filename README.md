@@ -668,16 +668,28 @@ fun myWith(name: String, block: String.() -> Unit) {
     name.block()
 }
 ```
-#### Standard Library: apply & run
+#### Standard Library: run, apply & let
 ```kotlin
 fish.run {
    name
 }
+```
 
+```kotlin
 val fish2 = Fish().apply {
-     name = ?sharky?
+     name = "sharky"
 }
 ```
+```kotlin
+//let return a copy of the change object.
+println(fish
+        .let { it.name.capitalize() }
+        .let { it + "fish" }
+        .let { it.length }
+        .let { it + 31 })
+//return 42
+```
+
 #### Standard Library: with & repeat
 ```kotlin
 with(fish.name) {
