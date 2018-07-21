@@ -724,9 +724,10 @@ inline fun myWith(name: String, operation: String.() -> Unit) {
 ```
 
 #### Lambda instead of SAM
+SAM: Single Abstract Method
 ```kotlin
 fun example() {
    runNow {
-      println(?Passing a lambda as a Runnable?)
+      println("Passing a lambda as a Runnable)
 }
 ```
