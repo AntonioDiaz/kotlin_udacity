@@ -663,6 +663,7 @@ val myFish = listOf(Fish("Flipper"), Fish("Mobi Dick"), Fish("Dory"))
 myFish.filter { it.name.contains("i")}.joinToString (" ") { it.name }
 ```
 #### Higher-Order function
+Function that takes functions as an argument.
 ```kotlin
 fun myWith(name: String, block: String.() -> Unit) {
     name.block()
@@ -696,15 +697,32 @@ with(fish.name) {
    println(name)
 }
 
-repeat(3) { rep ->
-    println(" current repetition: $rep")}
+repeat(3) { rep -> println(" current repetition: $rep")}
 ```
 #### Inline
+Lambdas are objects: a lambda expression is an instance of a function interface, 
+which is itself a subtype of of object. 
+This can be a problem is the lambda is complex or is used very often.
+
+To fix this Kotlin offers inline.
+
 ```kotlin
-Inline fun myWith(name: String, operation: String.() -> Unit) {
+//without inline an object is created every call to myWith
+myWith(fish.name, object : Function1<String, Unit> {
+    override fun invoke(name: String) {
+        name.capitalize()
+    }
+});
+
+//with inline no object is created, and lambda body is inline here
+fish.name.capitalize()
+
+
+inline fun myWith(name: String, operation: String.() -> Unit) {
     name.operation()
 }
 ```
+
 #### Lambda instead of SAM
 ```kotlin
 fun example() {

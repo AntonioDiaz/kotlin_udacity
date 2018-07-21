@@ -31,8 +31,22 @@ fun fishExamples() {
             .let { it.length }
             .let { it + 31 })
 
+    //without inline an object is created every call to myWith
+    myWith(fish.name, object : Function1<String, Unit> {
+        override fun invoke(name: String) {
+            name.capitalize()
+        }
+    });
+
+    //with inline no object is created, and lambda body is inline here
+    fish.name.capitalize()
+
 }
 
 fun myWith(name: String, block: String.() -> Unit) {
+    name.block()
+}
+
+inline fun myWithInline(name: String, block: String.() -> Unit) {
     name.block()
 }
