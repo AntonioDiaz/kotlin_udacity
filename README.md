@@ -180,11 +180,9 @@ val myList =
    mutableListOf("tuna",,"shark")
 ```
 
-
 ```kotlin
 myList.remove("shark") // OK!
 ```
-
 
 ```kotlin
 val swarm = listOf(fish, plants)
@@ -219,12 +217,7 @@ for (i in 1..5) print(i)
 for (i in 5 downTo 1) print(i)
 
 for (i in 3..6 step 2) print(i) // Prints: 35
-```        
-
-
-
-
-
+```
 
 ## Lesson 3: Functions
 #### Functions
@@ -278,11 +271,9 @@ updateDirty(50, ::increaseDirty)
 ```kotlin
 class Aquarium(var length: Int = 100, var width: Int = 20, var height: Int = 40) {
 
-
 constructor(numOfFish: Int): this() {
-
-    init {
-     // do stuff
+    init { 
+        // do stuff 
     }
 
     val volume: Int 
@@ -312,13 +303,11 @@ inside class:
 
 #### Inheritance
 ```kotlin
-open class Aquarium ?.. {
+open class Aquarium(var length: Int = 100, var width: Int = 20, var height: Int = 40) {
     open var water = volume * 0.9
     open var volume
 }
-```
 
-```kotlin
 class TowerTank (): Aquarium() {
     override var volume: Int
     get() = (w * h * l / 1000 * PI).toInt()
@@ -374,7 +363,6 @@ dataClassInstance1.equals(dataClassInstance2)
 val dataClassInstance3.copy(dataClassInstance2)
 ```
 
-
 #### Composition
 ```kotlin
 fun main (args: Array<String>) {
@@ -417,7 +405,6 @@ object MobyDickWhale {
 }
 ```
 
-
 #### enum
 ```kotlin
 enum class Color(val rgb: Int) {
@@ -447,17 +434,11 @@ equipment.first.first
 val testList = listOf(11,12,13,14,15,16,17,18,19,20)
 listOf<Int>(1,2,3,4,5,6,7,8,9,0).reversed()
 
-
-
-
 var symptoms = mutableListOf("white spots", "red spots", "not eating", "bloated", "belly up")
 symptoms.add("white fungus")
 symptoms.remove("white fungus")
 symptoms.contains("red")
 println(symptoms.subList(4, symptoms.size))
-
-
-
 
 listOf(1, 5, 3).sum()
 listOf("a", "b", "cc").sumBy { it.length }
@@ -485,7 +466,7 @@ inventory.remove("fish net")
 const val CONSTANT = "top-level constant" // compile time
 
 object Constants {
-const val CONSTANT2 = "object constant"
+    const val CONSTANT2 = "object constant"
 }
 
 class MyClass {
@@ -503,10 +484,10 @@ fun String.hasSpaces(): Boolean {
 }
 
 fun extensionExample() {
-   ?Does it have spaces??.hasSpaces()
+   "Does it have spaces"?.hasSpaces()
 }
 
-? fun String.hasSpaces() = find { it == ' ' } != null
+fun String.hasSpaces() = find { it == ' ' } != null
 
 fun AquariumPlant.isRed() = color == "red"
 
@@ -531,11 +512,11 @@ fun propertyExample() {
 #### generic classes
 ```kotlin
 class MyList<T> {
-   fun get(pos: Int): T {
-   TODO("implement")
-}
+    fun get(pos: Int): T {
+        TODO("implement")
+    }
 
-fun addItem(item: T) {}
+    fun addItem(item: T) {}
 }
 
 fun workWithMyList() {
@@ -565,8 +546,8 @@ class LakeWater : WaterSupply(true) {
 class Aquarium<T>(val waterSupply: T)
 
 fun genericsExample() {
-   val aquarium = Aquarium(TapWater())
-aquarium.waterSupply.addChemicalCleanes()
+    val aquarium = Aquarium(TapWater())
+    aquarium.waterSupply.addChemicalCleanes()
 }
 ```
 #### generics: Non-nullable
@@ -610,7 +591,7 @@ inline fun <reified R: WaterSupply> Aquarium<*>.hasWaterSupplyOfType() = waterSu
 
 #### Annotations
 ```kotlin
-@file:JvmName(?InteropFish?)
+@file:JvmName("InteropFish")
 @JvmStatic fun interop()
 
 annotation class ImAPlant
