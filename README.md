@@ -478,23 +478,42 @@ class MyClass {
 
 #### extension functions
 ```kotlin
+//String extension
 fun String.hasSpaces(): Boolean {
-   val found = this.find { it == ' ' }
+   val found: Char? = this.find { it == ' ' }
    return found != null
 }
+//short way
+fun String.hasSpacesShort() = find { it == ' '} != null
 
 fun extensionExample() {
    "Does it have spaces"?.hasSpaces()
 }
+//resolved staticaly
+open class AquariumPlant(val color: String, private val size: Int)
+class GreenLeafyPlant(size: Int): AquariumPlant("Green", size)
+fun AquariumPlant.isRed() = color == "Red"
+fun AquariumPlant.print() = println("AquariumPlant")
+fun GreenLeafyPlant.print() = println("GreenLeafyPlant")
 
-fun String.hasSpaces() = find { it == ' ' } != null
+fun staticExample() {
+    val plant = GreenLeafyPlant(50)
+    plant.print() //GreenLeafyPlant
+    
+    val aquariumPlant: AquariumPlant = plant
+    aquariumPlant.print() //AquariumPlant
+ }
 
-fun AquariumPlant.isRed() = color == "red"
-
+//if the receiver can be null
 fun AquariumPlant?.pull() {
    this?.apply {
        println("removing $this")
    }
+}
+
+fun nullableExample() {
+    val plant: AquariumPlant ?= null
+    plant.pull()
 }
 ```
 
