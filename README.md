@@ -529,6 +529,8 @@ fun propertyExample() {
 ```
 
 #### generic classes
+All generic types are only used at complile time.
+At runtime all the genery types are erased.
 ```kotlin
 class MyList<T> {
     fun get(pos: Int): T {
@@ -565,24 +567,64 @@ class LakeWater : WaterSupply(true) {
 class Aquarium<T>(val waterSupply: T)
 
 fun genericsExample() {
+    //type can be infered from the parameter
+    //val aquarium = Aquarium<TapWater>(TapWater())
     val aquarium = Aquarium(TapWater())
     aquarium.waterSupply.addChemicalCleanes()
 }
 ```
 #### generics: Non-nullable
 ```kotlin
+//not allow null as Type.
 class Aquarium<T: Any>(val waterSupply: T)
 
+// Type must be a WaterSupply
 class Aquarium<T: WaterSupply>(val waterSupply: T)
+
+//adding methods to Aquarium
+class Aquarium<T: WaterSupply>(val waterSupply: T) {
+    fun addWater() {
+         //check acts as an assertion and it will throw an illegal exception if its argument is false 
+        check(!waterSupply.needsProcessed) { "watter supply needs processed" }
+        println("adding water from $waterSupply")
+    }
+}
+fun genericsExample() {
+    val aquarium = Aquarium<TapWater>(TapWater())
+    aquarium.waterSupply.addChemicalCleaners()
+    
+    val aquarium4 = Aquarium(LakeWater())
+    aquarium4.waterSupply.filter()
+    aquarium4.addWater()
+}
 ```
 
 #### generics: In and Out Types
+* Out types: are type parameters that only ever occur in return values of functions or on Val properties.
+* In types: can be used anytime the generics is only used as an argument to functions.
+
 ```kotlin
-class Aquarium<out T: WaterSupply>(val waterSupply: T) { ?}
+class Aquarium<out T: WaterSupply>(val waterSupply: T) { }
 
 interface Cleaner<in T: WaterSupply> {
    fun clean(waterSupply: T)
 }
+
+class TapWaterCleaner: Cleaner<TapWater> {
+    override fun clean(waterSupply: TapWater) {
+        waterSupply.addChemicalCleaners()
+    }
+}
+
+class Aquarium<T: WaterSupply>(val waterSupply: T) {
+    fun addWater(cleaner: Cleaner<T>) {
+        if (waterSupply.needsProcessed) {
+            cleaner.clean(waterSupply)
+        }
+        println("adding water from $waterSupply")
+    }
+}
+
 ```
 
 #### Generic functions and methods
@@ -593,20 +635,44 @@ fun <T: WaterSupply> isWaterClean(aquarium: Aquarium<T>) {
 
 fun genericsFunExample() {
    val aquarium = Aquarium(TapWater())
+   //isWaterClean<TapWater>(aquarium)
    isWaterClean(aquarium)
 }
 
-fun <R: WaterSupply> hasWaterSupplyOfType() = waterSupply is R
+class Aquarium<T: WaterSupply>(val waterSupply: T) {
+    fun addWater(cleaner: Cleaner<T>) {
+        if (waterSupply.needsProcessed) {
+            cleaner.clean(waterSupply)
+        }
+        println("adding water from $waterSupply")
+    }
+    //reified means real type
+    //inline
+    inline fun <reified R: WaterSupply> hasWaterSupplyOfType() = waterSupply is R
+}
+
 ```
 
 #### Inline / reified
-```kotlin
+* Type erasure: at runtme all generic types are erased. This is why needs **reified**
+* Reified: generic types that are use at runtime.
+ ```kotlin
 inline fun <reified R: WaterSupply> hasWaterSupplyOfType() = waterSupply is R
 
+//WaterSupply extension
 inline fun <reified T: WaterSupply> WaterSupply.isOfType() = this is T
 
+//star protections
 inline fun <reified R: WaterSupply> Aquarium<*>.hasWaterSupplyOfType() = waterSupply is R
+
+fun genericExample() {
+    val aquarium: Aquarium<TapWater> = Aquarium(TapWater())
+    aquarium.hasWaterSupplyOfType<TapWater>() // true
+    aquarium.waterSupply.ifOfType<LakeWater>() // false
+}
+
 ```
+ 
 
 #### Annotations
 ```kotlin
@@ -656,20 +722,37 @@ fun labels() {
 ```
 
 ## Lesson 6: Functional Manipulation
+
 #### Lambda recap
 ```kotlin
+val waterFilter = { dirty: Int -> dirty / 2 }
+waterFilter(30) //return 15.
+
 data class Fish (val name: String)
 val myFish = listOf(Fish("Flipper"), Fish("Mobi Dick"), Fish("Dory"))
 myFish.filter { it.name.contains("i")}.joinToString (" ") { it.name }
 ```
+
 #### Higher-Order function
-Function that takes functions as an argument.
+* Function that takes functions as an argument.
+* Writing higher-order functions with extension lambdas is the most advanced part of the Kotlin language 
+* The arguments are: the object on which to execute the operation and a function that defines 
+the operation to execute on the object.
+* Unit is when function doesn't return anything.
 ```kotlin
 fun myWith(name: String, block: String.() -> Unit) {
     name.block()
 }
+
+
+
 ```
 #### Standard Library: run, apply & let
+* Run: takes one lambda as its argument and returns the results of executing the lambda.
+* Apply: returns the object it's applied to. 
+* Difference: run returns the result of executing while apply return the object after the lambda
+has been applied.
+* Let: returns a copy of the changed object. Useful for chaining manipulations together.
 ```kotlin
 fish.run {
    name
