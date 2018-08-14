@@ -13,6 +13,7 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- doctoc README.md --github !-->
 **Contents**
 
 - [Lesson 1: Introduction](#lesson-1-introduction)
@@ -58,17 +59,17 @@
     - [generics: In and Out Types](#generics-in-and-out-types)
     - [Generic functions and methods](#generic-functions-and-methods)
     - [Inline / reified](#inline--reified)
-    - [Annotations](#annotations)
     - [Reflection](#reflection)
     - [Annotations for getters and setters](#annotations-for-getters-and-setters)
     - [Labeled breaks](#labeled-breaks)
 - [Lesson 6: Functional Manipulation](#lesson-6-functional-manipulation)
     - [Lambda recap](#lambda-recap)
-    - [Higher order function](#higher-order-function)
-    - [Standard Library: apply & run](#standard-library-apply--run)
+    - [Higher-Order function](#higher-order-function)
+    - [Standard Library: run, apply & let](#standard-library-run-apply--let)
     - [Standard Library: with & repeat](#standard-library-with--repeat)
     - [Inline](#inline)
-    - [Lambda instead ofSAM](#lambda-instead-ofsam)
+    - [Lambda instead of SAM](#lambda-instead-of-sam)
+- [Examples](#examples)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
