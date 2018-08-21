@@ -3,3 +3,8 @@ out/
 .gradle/
 .DS_Store
 build/
+.gradle
+gradle/
+gradlew
+gradlew.bat
+local.properties
